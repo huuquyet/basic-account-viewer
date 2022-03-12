@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Basic Account Viewer",
+    "slug": "basic-account-viewer",
+    "sdkVersion": "44.0.6",
+    "privacy": "public",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "primaryColor": "#000000",
+    "platforms": ["ios", "android", "web"],
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "backgroundColor": "#ffffff",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"]
+  }
+}
