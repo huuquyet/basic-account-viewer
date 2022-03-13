@@ -72,7 +72,7 @@ const HomeScreen = () => {
             />
           ))}
         </View>
-        {!!!keypair ? (
+        {!keypair ? (
           <Button
             onPress={connect}
             title="Connect wallet"
@@ -169,7 +169,7 @@ const AssetDetail = ({ asset, network }) => {
     }`;
 
     return `${networkLink}${
-      !!asset.liquidity_pool_id ? `${liquidityLink}` : `${assetLink}`
+      !asset.liquidity_pool_id ? `${assetLink}` : `${liquidityLink}`
     }`;
   };
 
@@ -186,21 +186,23 @@ const AssetDetail = ({ asset, network }) => {
             {asset.assetCode ? asset.assetCode.slice(0, 3) : "+"}
           </Text>
         </View>
-        {!!asset.liquidity_pool_id ? (
+        {!asset.liquidity_pool_id ? (
           <View style={styles.assetText}>
             <Text>
-              <strong>{`${asset.balance} pool shares`}</strong>
+              <strong>{`${roundBalance(asset.balance)} ${
+                asset.assetCode
+              }`}</strong>
             </Text>
-            <Text>
-              Liquidity pool id: {asset?.liquidity_pool_id.slice(0, 18)}...
-            </Text>
+            <Text>{displayId(asset?.assetIssuer)}</Text>
           </View>
         ) : (
           <View style={styles.assetText}>
             <Text>
-              <strong>{`${asset.balance} ${asset.assetCode}`}</strong>
+              <strong>{`${roundBalance(asset.balance)} pool shares`}</strong>
             </Text>
-            <Text>{displayId(asset?.assetIssuer)}</Text>
+            <Text>
+              Liquidity pool id: {asset?.liquidity_pool_id.slice(0, 18)}...
+            </Text>
           </View>
         )}
       </View>
@@ -215,6 +217,12 @@ const displayId = (accountId) => {
   return accountId
     ? `${accountId.slice(0, 12)}...${accountId.slice(-12)}`
     : undefined;
+};
+
+const roundBalance = (balance) => {
+  return balance > 0 && balance < 1
+    ? Number(Math.round(balance + "e8") + "e-8")
+    : Number(Math.round(balance + "e2") + "e-2");
 };
 
 const randomHexColor = () => {
