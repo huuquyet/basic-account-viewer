@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
@@ -84,7 +84,7 @@ const HomeScreen = () => {
       </View>
 
       {!!account && !account?.isError ? (
-        <View>
+        <View style={styles.container}>
           <View style={styles.accountContainer}>
             <Text>
               <strong>Account</strong>
@@ -99,10 +99,13 @@ const HomeScreen = () => {
             </Text>
           </View>
 
-          <ScrollView style={styles.column}>
-            <Text>
-              <strong>Balances</strong>
-            </Text>
+          <Text>
+            <strong>Balances</strong>
+          </Text>
+          <ScrollView
+            style={styles.column}
+            contentContainerStyle={styles.scrollContainer}
+          >
             {account?.balances.map((asset, index) => (
               <View style={styles.assetContainer} key={`asset_${index}`}>
                 <AssetDetail asset={asset} network={network} />
@@ -117,9 +120,11 @@ const HomeScreen = () => {
               Freighter extension is not installed
               <br />
               Get it from{" "}
-              <Pressable onPress={() => Linking.openURL(freighter.installUrl)}>
+              <TouchableOpacity
+                onPress={() => Linking.openURL(freighter.installUrl)}
+              >
                 <Text style={styles.link}>{freighter.installUrl}</Text>
-              </Pressable>
+              </TouchableOpacity>
             </Text>
           ) : (
             <Text>
@@ -142,16 +147,15 @@ const AccountDetail = ({ accountId, network }) => {
   const accountUrl = `https://stellar.expert/explorer/${network.name}/account/${accountId}`;
 
   return (
-    <View style={styles.accountDetail}>
-      <Pressable onPress={() => Linking.openURL(accountUrl)}>
+    <View style={styles.detailContainer}>
+      <TouchableOpacity onPress={() => Linking.openURL(accountUrl)}>
         <Text style={styles.link}>
           <strong>{displayId(accountId)}</strong>
         </Text>
-      </Pressable>
-      <FontAwesome5.Button
-        name="copy"
-        onPress={() => Clipboard.setString(accountId)}
-      />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => Clipboard.setString(accountId)}>
+        <FontAwesome5 name="copy" size={18} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -170,8 +174,8 @@ const AssetDetail = ({ asset, network }) => {
   };
 
   return (
-    <Pressable onPress={() => Linking.openURL(assetUrl())}>
-      <View style={styles.assetDetail}>
+    <View style={styles.detailContainer}>
+      <View style={styles.row}>
         <View
           style={[
             styles.avatarBackground,
@@ -183,14 +187,16 @@ const AssetDetail = ({ asset, network }) => {
           </Text>
         </View>
         {!!asset.liquidity_pool_id ? (
-          <View style={{ flexDirection: "column", marginLeft: 10 }}>
+          <View style={styles.assetText}>
             <Text>
               <strong>{`${asset.balance} pool shares`}</strong>
             </Text>
-            <Text>Liquidity pool id: {asset.liquidity_pool_id}</Text>
+            <Text>
+              Liquidity pool id: {asset?.liquidity_pool_id.slice(0, 18)}...
+            </Text>
           </View>
         ) : (
-          <View style={{ flexDirection: "column", marginLeft: 10 }}>
+          <View style={styles.assetText}>
             <Text>
               <strong>{`${asset.balance} ${asset.assetCode}`}</strong>
             </Text>
@@ -198,13 +204,16 @@ const AssetDetail = ({ asset, network }) => {
           </View>
         )}
       </View>
-    </Pressable>
+      <TouchableOpacity onPress={() => Linking.openURL(assetUrl())}>
+        <FontAwesome5 name="external-link-alt" size={18} />
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const displayId = (accountId) => {
   return accountId
-    ? `${accountId.slice(0, 16)}...${accountId.slice(-16)}`
+    ? `${accountId.slice(0, 12)}...${accountId.slice(-12)}`
     : undefined;
 };
 
@@ -233,6 +242,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  scrollContainer: {
+    paddingTop: 5,
+  },
   accountContainer: {
     flexDirection: "column",
     borderBottomWidth: "thin",
@@ -240,18 +252,17 @@ const styles = StyleSheet.create({
   },
   assetContainer: {
     borderBottomWidth: 1,
-    borderColor: "gray.200",
+    borderColor: "gray",
     padding: 10,
   },
-  accountDetail: {
+  detailContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  assetDetail: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+  assetText: {
+    flexDirection: "column",
+    marginLeft: 10,
   },
   avatarBackground: {
     alignItems: "center",
