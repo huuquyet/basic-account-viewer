@@ -1,0 +1,35 @@
+{
+  "files": {
+    "app.js": "/basic-account-viewer/static/js/app.c878d75d.chunk.js",
+    "app.js.map": "/basic-account-viewer/static/js/app.c878d75d.chunk.js.map",
+    "runtime~app.js": "/basic-account-viewer/static/js/runtime~app.daa6be7a.js",
+    "runtime~app.js.map": "/basic-account-viewer/static/js/runtime~app.daa6be7a.js.map",
+    "static/js/2.dfff94e2.chunk.js": "/basic-account-viewer/static/js/2.dfff94e2.chunk.js",
+    "static/js/2.dfff94e2.chunk.js.map": "/basic-account-viewer/static/js/2.dfff94e2.chunk.js.map",
+    "fonts/AntDesign.ttf": "/basic-account-viewer/./fonts/AntDesign.ttf",
+    "fonts/Entypo.ttf": "/basic-account-viewer/./fonts/Entypo.ttf",
+    "fonts/Feather.ttf": "/basic-account-viewer/./fonts/Feather.ttf",
+    "fonts/FontAwesome.ttf": "/basic-account-viewer/./fonts/FontAwesome.ttf",
+    "fonts/FontAwesome5_Brands.ttf": "/basic-account-viewer/./fonts/FontAwesome5_Brands.ttf",
+    "fonts/FontAwesome5_Solid.ttf": "/basic-account-viewer/./fonts/FontAwesome5_Solid.ttf",
+    "fonts/Fontisto.ttf": "/basic-account-viewer/./fonts/Fontisto.ttf",
+    "fonts/Foundation.ttf": "/basic-account-viewer/./fonts/Foundation.ttf",
+    "fonts/Ionicons.ttf": "/basic-account-viewer/./fonts/Ionicons.ttf",
+    "fonts/MaterialCommunityIcons.ttf": "/basic-account-viewer/./fonts/MaterialCommunityIcons.ttf",
+    "fonts/MaterialIcons.ttf": "/basic-account-viewer/./fonts/MaterialIcons.ttf",
+    "fonts/SimpleLineIcons.ttf": "/basic-account-viewer/./fonts/SimpleLineIcons.ttf",
+    "favicon-16.png": "/basic-account-viewer/favicon-16.png",
+    "favicon-32.png": "/basic-account-viewer/favicon-32.png",
+    "favicon.ico": "/basic-account-viewer/favicon.ico",
+    "index.html": "/basic-account-viewer/index.html",
+    "manifest.json": "/basic-account-viewer/manifest.json",
+    "serve.json": "/basic-account-viewer/serve.json",
+    "static/js/2.dfff94e2.chunk.js.LICENSE.txt": "/basic-account-viewer/static/js/2.dfff94e2.chunk.js.LICENSE.txt",
+    "static/media/freighter.png": "/basic-account-viewer/static/media/freighter.9391c7b8.png"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.daa6be7a.js",
+    "static/js/2.dfff94e2.chunk.js",
+    "static/js/app.c878d75d.chunk.js"
+  ]
+}
