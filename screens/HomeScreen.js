@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import * as Linking from "expo-linking";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { isConnected } from "@stellar/freighter-api";
 
 import {
   connectFreighter,
   fetchAccount,
-  freighter,
   initServer,
   networks,
 } from "../services/account";
-import { FontAwesome5 } from "@expo/vector-icons";
 
-const HomeScreen = () => {
+function HomeScreen() {
   const [network, setNetwork] = useState(networks[0]);
   const [server, setServer] = useState();
   const [keypair, setKeypair] = useState();
@@ -61,7 +61,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttons}>
+      <View style={styles.buttonRow}>
         <View style={styles.row}>
           {networks.map((net) => (
             <Button
@@ -76,7 +76,7 @@ const HomeScreen = () => {
           <Button
             onPress={connect}
             title="Connect wallet"
-            disabled={!freighter.isInstalled}
+            disabled={!isConnected()}
           />
         ) : (
           <Button color="#841584" onPress={disconnect} title="Disconnect" />
@@ -115,16 +115,16 @@ const HomeScreen = () => {
         </View>
       ) : (
         <View style={styles.infoContainer}>
-          {!freighter.isInstalled ? (
+          {!isConnected() ? (
             <Text>
               Freighter extension is not installed
               <br />
               Get it from{" "}
-              <TouchableOpacity
-                onPress={() => Linking.openURL(freighter.installUrl)}
+              <Pressable
+                onPress={() => Linking.openURL("https://freighter.app/")}
               >
-                <Text style={styles.link}>{freighter.installUrl}</Text>
-              </TouchableOpacity>
+                <Text style={styles.link}>https://freighter.app/</Text>
+              </Pressable>
             </Text>
           ) : (
             <Text>
@@ -139,7 +139,7 @@ const HomeScreen = () => {
       )}
     </View>
   );
-};
+}
 
 export default HomeScreen;
 
@@ -148,14 +148,14 @@ const AccountDetail = ({ accountId, network }) => {
 
   return (
     <View style={styles.detailContainer}>
-      <TouchableOpacity onPress={() => Linking.openURL(accountUrl)}>
+      <Pressable onPress={() => Linking.openURL(accountUrl)}>
         <Text style={styles.link}>
           <strong>{displayId(accountId)}</strong>
         </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => Clipboard.setString(accountId)}>
+      </Pressable>
+      <Pressable onPress={() => Clipboard.setStringAsync(accountId)}>
         <FontAwesome5 name="copy" size={18} />
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };
@@ -206,9 +206,9 @@ const AssetDetail = ({ asset, network }) => {
           </View>
         )}
       </View>
-      <TouchableOpacity onPress={() => Linking.openURL(assetUrl())}>
+      <Pressable onPress={() => Linking.openURL(assetUrl())}>
         <FontAwesome5 name="external-link-alt" size={18} />
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   link: {
     textDecorationLine: "underline",
   },
-  buttons: {
+  buttonRow: {
     flexDirection: "row",
     justifyContent: "space-between",
   },

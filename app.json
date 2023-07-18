@@ -2,9 +2,9 @@
   "expo": {
     "name": "Basic Account Viewer",
     "slug": "basic-account-viewer",
-    "sdkVersion": "43.0.0",
+    "sdkVersion": "49.0.0",
     "privacy": "public",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "orientation": "portrait",
     "primaryColor": "#000000",
     "platforms": ["ios", "android", "web"],
