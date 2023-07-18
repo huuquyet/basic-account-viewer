@@ -1,6 +1,6 @@
 import { Networks } from "stellar-base";
 import { Keypair, Server } from "stellar-sdk";
-import * as Freighter from "@stellar/freighter-api";
+import { isConnected, getPublicKey } from "@stellar/freighter-api";
 
 export const networks = [
   {
@@ -24,17 +24,12 @@ export const initServer = (network, setServer, setAccount) => {
   setAccount(undefined);
 };
 
-export const freighter = {
-  isInstalled: Freighter.isConnected(),
-  installUrl: "https://freighter.app/",
-};
-
 export const connectFreighter = async () => {
   try {
-    if (!freighter.isInstalled) {
+    if (!isConnected()) {
       return { isError: true, error: new Error("Freighter not available") };
     }
-    const publicKey = await Freighter.getPublicKey();
+    const publicKey = await getPublicKey();
     const keypair = Keypair.fromPublicKey(publicKey);
     return {
       isError: false,
@@ -82,7 +77,7 @@ export const fetchAccount = async (server, keypair) => {
         .then((operations) => operations?.records)
         .catch(console.error)) || [];
     const createRecord = operations.find(
-      (rec) => rec.type === "create_account"
+      (rec) => rec.type === "create_account",
     );
     const createdAt = createRecord ? createRecord.created_at : "-";
     const createdBy = createRecord ? createRecord.source_account : "-";
