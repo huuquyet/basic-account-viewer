@@ -34,7 +34,7 @@
     "react-native-screens": "^3.22.1",
     "react-native-web": "^0.19.6",
     "stellar-base": "^9.0.0",
-    "stellar-sdk": "^10.4.1"
+    "stellar-sdk": "^11.2.2"
   },
   "devDependencies": {
     "@expo/webpack-config": "^18.1.1",
