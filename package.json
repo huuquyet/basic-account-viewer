@@ -20,7 +20,7 @@
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@stellar/freighter-api": "^1.5.1",
-    "expo": "^49.0.3",
+    "expo": "^56.0.11",
     "expo-asset": "^8.10.1",
     "expo-clipboard": "^4.3.0",
     "expo-constants": "^14.4.2",
